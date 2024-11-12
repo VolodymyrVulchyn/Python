@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Стиль для космічного фонового градієнта */
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: linear-gradient(45deg, #000428, #004e92, #2c3e50, #0d2b48);
+            background-size: 400% 400%;
+            animation: gradientAnimation 8s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+            position: relative;
+        }
+
+        /* Анімація для космічного градієнта */
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Основний контейнер */
+        .content {
+            text-align: center;
+            color: white;
+            z-index: 10;
+            position: relative;
+        }
+
+        .content h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .content p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+        }
+
+        .content .btn {
+            padding: 10px 20px;
+            background-color: #fff;
+            color: #ff6b81;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .content .btn:hover {
+            background-color: #f7a8b8;
+        }
+
+        /* Павутинка */
+        .web {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .web .line {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        /* Лінії для з'єднання точок */
+        .web .connector {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.3);
+            pointer-events: none;
+            border-radius: 2px;
+        }
+
+        /* Комети */
+        .comet {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: white;
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+            opacity: 0.7;
+            animation: cometAnimation 5s linear infinite;
+        }
+
+        @keyframes cometAnimation {
+            0% {
+                top: -10px;
+                left: 0%;
+                transform: translateX(0) translateY(0);
+                opacity: 0.7;
+            }
+            100% {
+                top: 100%;
+                left: 100%;
+                transform: translateX(-1000px) translateY(1000px);
+                opacity: 0;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="content">
+        <h1>Welcome to the PAWN SHOP!</h1>
+        <p>Explore the endless cosmos and sells or pledge your items :).</p>
+        <button class="btn">Get Started</button>
+    </div>
+
+    <!-- Павутинка -->
+    <div class="web" id="web"></div>
+
+    <!-- Комети -->
+    <div class="comet" style="top: 20%; left: 10%; animation-delay: 0s;"></div>
+    <div class="comet" style="top: 50%; left: 40%; animation-delay: 2s;"></div>
+    <div class="comet" style="top: 80%; left: 70%; animation-delay: 4s;"></div>
+    <div class="comet" style="top: 30%; left: 80%; animation-delay: 1s;"></div>
+    <div class="comet" style="top: 10%; left: 60%; animation-delay: 3s;"></div>
+
+    <script>
+        // Створення павутиння, яке слідує за мишкою
+        const web = document.getElementById('web');
+        let mouseX = 0, mouseY = 0;
+        const lines = [];
+        const connectors = [];
+        const maxLines = 50;
+
+        // Створення точок (ліній) павутиння
+        for (let i = 0; i < maxLines; i++) {
+            const line = document.createElement('div');
+            line.classList.add('line');
+            web.appendChild(line);
+            lines.push(line);
+        }
+
+        // Створення ліній для з'єднання точок
+        for (let i = 0; i < maxLines; i++) {
+            const connector = document.createElement('div');
+            connector.classList.add('connector');
+            web.appendChild(connector);
+            connectors.push(connector);
+        }
+
+        // Обробка руху мишки
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.pageX;
+            mouseY = e.pageY;
+        });
+
+        // Оновлення позицій ліній та з'єднань
+        function updateWeb() {
+            lines.forEach((line, index) => {
+                const offsetX = (Math.random() - 0.5) * 30;
+                const offsetY = (Math.random() - 0.5) * 30;
+                line.style.left = `${mouseX + offsetX}px`;
+                line.style.top = `${mouseY + offsetY}px`;
+                line.style.width = `${Math.random() * 100 + 50}px`;
+                line.style.height = `${Math.random() * 100 + 50}px`;
+                line.style.transform = `rotate(${Math.random() * 360}deg)`;
+            });
+
+            // Оновлення з'єднання точок
+            connectors.forEach((connector, index) => {
+                const distanceX = mouseX - (parseFloat(lines[index].style.left) || mouseX);
+                const distanceY = mouseY - (parseFloat(lines[index].style.top) || mouseY);
+                const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+
+                connector.style.left = `${mouseX}px`;
+                connector.style.top = `${mouseY}px`;
+                connector.style.width = `${distance}px`;
+                connector.style.height = '2px';
+                connector.style.transform = `rotate(${Math.atan2(distanceY, distanceX) * (180 / Math.PI)}deg)`;
+            });
+        }
+
+        // Анімація руху павутиння
+        setInterval(updateWeb, 10);
+    </script>
+
+</body>
+</html>
