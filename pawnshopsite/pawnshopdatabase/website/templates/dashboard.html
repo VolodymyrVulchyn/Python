@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Статистичний Дашборд</title>
+
+    <!-- Підключення Bokeh CSS та JS -->
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-2.4.3.min.js"></script>
+    <link href="https://cdn.bokeh.org/bokeh/release/bokeh-2.4.3.min.css" rel="stylesheet" type="text/css">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .chart-container {
+            margin: 20px 0;
+            width: 100%;
+        }
+
+        .chart-container h2 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .charts {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .chart {
+            width: 48%;
+            min-width: 400px;
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        /* Для мобільних пристроїв */
+        @media (max-width: 768px) {
+            .charts {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .chart {
+                width: 80%;
+                margin-bottom: 20px;
+            }
+        }
+
+        .chart-container b {
+            font-size: 1.1em;
+            color: #34495e;
+        }
+
+        .chart-container p {
+            font-size: 1em;
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+    <h1>Статистичний Дашборд</h1>
+
+    <div class="charts">
+        <!-- Стовпчикова діаграма Plotly -->
+        <div class="chart-container">
+            <h2>Стовпчикова діаграма (Plotly)</h2>
+            <div class="chart">
+                {{ bar_chart|safe }}
+            </div>
+        </div>
+
+        <!-- Лінійний графік Plotly -->
+        <div class="chart-container">
+            <h2>Лінійний графік (Plotly)</h2>
+            <div class="chart">
+                {{ line_chart|safe }}
+            </div>
+        </div>
+    </div>
+
+    <div class="charts">
+        <!-- Кругова діаграма Plotly -->
+        <div class="chart-container">
+            <h2>Кругова діаграма (Plotly)</h2>
+            <div class="chart">
+                {{ pie_chart|safe }}
+            </div>
+        </div>
+
+<!--        &lt;!&ndash; Бокова діаграма Bokeh &ndash;&gt;-->
+<!--        <div class="chart-container">-->
+<!--            <h2>Стовпчикова діаграма (Bokeh)</h2>-->
+<!--            <div class="chart">-->
+<!--                {{ bokeh_bar_chart_div|safe }}-->
+<!--                {{ bokeh_bar_chart_script|safe }}-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    <div class="charts">-->
+<!--        &lt;!&ndash; Лінійний графік Bokeh &ndash;&gt;-->
+<!--        <div class="chart-container">-->
+<!--            <h2>Лінійний графік (Bokeh)</h2>-->
+<!--            <div class="chart">-->
+<!--                {{ bokeh_line_chart_div|safe }}-->
+<!--                {{ bokeh_line_chart_script|safe }}-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        &lt;!&ndash; Кругова діаграма Bokeh &ndash;&gt;-->
+<!--        <div class="chart-container">-->
+<!--            <h2>Кругова діаграма (Bokeh)</h2>-->
+<!--            <div class="chart">-->
+<!--                {{ bokeh_pie_chart_div|safe }}-->
+<!--                {{ bokeh_pie_chart_script|safe }}-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+</body>
+</html>

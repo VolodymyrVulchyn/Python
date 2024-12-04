@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="text-center my-5">Реєстрація як Customer</h1>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.css" rel="stylesheet">
+
+<div class="tab-content">
+    <div class="tab-pane fade show active" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
+        <form method="POST" action="{% url 'register_customer' %}">
+            {% csrf_token %}
+
+            <div class="form-outline mb-4">
+                <input type="text" id="registerUsername" class="form-control" minlength="3" required name="username" placeholder="Username"/>
+                <label class="form-label" for="registerUsername">Username</label>
+            </div>
+
+            <!-- First Name -->
+            <div class="form-outline mb-4">
+                <input type="text" id="registerFirstName" class="form-control" maxlength="50" required name="first_name" placeholder="First Name"/>
+                <label class="form-label" for="registerFirstName">First Name</label>
+            </div>
+
+            <!-- Last Name -->
+            <div class="form-outline mb-4">
+                <input type="text" id="registerLastName" class="form-control" maxlength="50" required name="last_name" placeholder="Last Name"/>
+                <label class="form-label" for="registerLastName">Last Name</label>
+            </div>
+
+            <!-- Phone Number -->
+            <div class="form-outline mb-4">
+                <input type="tel" id="registerPhoneNumber" class="form-control" pattern="\d{10}" required name="phone_number" placeholder="Phone Number"/>
+                <label class="form-label" for="registerPhoneNumber">Phone Number</label>
+            </div>
+
+            <!-- City -->
+            <div class="form-outline mb-4">
+                <input type="text" id="registerCity" class="form-control" maxlength="50" required name="city" placeholder="City"/>
+                <label class="form-label" for="registerCity">City</label>
+            </div>
+
+            <!-- Address -->
+            <div class="form-outline mb-4">
+                <input type="text" id="registerAddress" class="form-control" maxlength="100" required name="address" placeholder="Address"/>
+                <label class="form-label" for="registerAddress">Address</label>
+            </div>
+
+            <!-- Email -->
+            <div class="form-outline mb-4">
+                <input type="email" id="registerEmail" class="form-control" required name="email" placeholder="Email"/>
+                <label class="form-label" for="registerEmail">Email</label>
+            </div>
+
+            <!-- Document Number -->
+            <div class="form-outline mb-4">
+                <input type="text" id="registerNumberDocument" class="form-control" maxlength="20" required name="number_document" placeholder="Number Document"/>
+                <label class="form-label" for="registerNumberDocument">Number Document</label>
+            </div>
+
+            <!-- Date of Birth -->
+            <div class="form-outline mb-4">
+                <input type="date" id="registerBirthday" class="form-control" maxlength="10" required name="date_birthday" placeholder="Date of Birth"/>
+                <label class="form-label" for="registerBirthday">Date of Birth</label>
+            </div>
+
+            <!-- Gender -->
+            <div class="form-outline mb-4">
+                <input type="text" id="registerGender" class="form-control" maxlength="10" required name="gender" placeholder="Gender"/>
+                <label class="form-label" for="registerGender">Gender</label>
+            </div>
+
+            <!-- Password -->
+            <div class="form-outline mb-4">
+                <input type="password" id="registerPassword" class="form-control" minlength="8" required name="password" placeholder="Password"/>
+                <label class="form-label" for="registerPassword">Password</label>
+            </div>
+
+
+            <!-- Terms of Service -->
+            <div class="form-check d-flex justify-content-center mb-4">
+                <input class="form-check-input me-2" type="checkbox" value="" id="registerCheck" checked aria-describedby="registerCheckHelpText" required />
+                <label class="form-check-label" for="registerCheck">
+                    I have read and agree to the terms
+                </label>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary btn-block mb-3">Зареєструватися</button>
+
+            <!-- Login Link -->
+            <div class="text-center">
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- MDB JS -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.js"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+{% endblock %}

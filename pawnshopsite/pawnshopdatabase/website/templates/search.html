@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: linear-gradient(45deg, #000428, #004e92, #2c3e50, #0d2b48);
+            background-size: 400% 400%;
+            animation: gradientAnimation 8s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+            position: relative;
+        }
+
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+
+        .content {
+            text-align: center;
+            color: white;
+            z-index: 10;
+            position: relative;
+        }
+
+        .content h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .content p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+        }
+
+        .content .btn {
+            padding: 10px 20px;
+            background-color: #fff;
+            color: #ff6b81;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .content .btn:hover {
+            background-color: #f7a8b8;
+        }
+
+
+        .form-container {
+            z-index: 10;
+            position: relative;
+            padding: 30px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .form-container .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #ff6b81;
+            color: white;
+            border: none;
+            font-size: 1.2rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-container button:hover {
+            background-color: #f7a8b8;
+        }
+
+        .result {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #fff;
+            color: #333;
+            border-radius: 8px;
+        }
+
+
+        .comet {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: white;
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+            opacity: 0.7;
+            animation: cometAnimation 5s linear infinite;
+        }
+
+        @keyframes cometAnimation {
+            0% {
+                top: -10px;
+                left: 0%;
+                transform: translateX(0) translateY(0);
+                opacity: 0.7;
+            }
+            100% {
+                top: 100%;
+                left: 100%;
+                transform: translateX(-1000px) translateY(1000px);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Main content -->
+    <div class="content">
+        <div class="form-container">
+            <h1>Search</h1>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ form.as_p }}
+                </div>
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+
+            {% if result %}
+                <div class="result">
+                    {% if result == 'Customer not found' or result == 'Employee not found' or result == 'Item not found' or result == 'Category not found' or result == 'Credit not found' %}
+                        <p>{{ result }}</p>
+                    {% else %}
+                        <p>{{ result }}</p>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+
+    <div class="comet" style="top: 20%; left: 10%; animation-delay: 0s;"></div>
+    <div class="comet" style="top: 50%; left: 40%; animation-delay: 2s;"></div>
+    <div class="comet" style="top: 80%; left: 70%; animation-delay: 4s;"></div>
+    <div class="comet" style="top: 30%; left: 80%; animation-delay: 1s;"></div>
+    <div class="comet" style="top: 10%; left: 60%; animation-delay: 3s;"></div>
+
+</body>
+</html>
